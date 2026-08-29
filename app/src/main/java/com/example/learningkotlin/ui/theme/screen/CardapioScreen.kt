@@ -1,87 +1,71 @@
 package com.example.learningkotlin.ui.theme.screen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.learningkotlin.ui.theme.LearningkotlinTheme
+import com.example.learningkotlin.ui.theme.components.MenuItem
 
-class CardapioScreen : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LearningkotlinTheme {
-
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LearningkotlinTheme {
-        Greeting("Android")
-    }
-}
+class CardapioScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CardapioScreenComponent() {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(
-            title = { Text("PAU NO CU") },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Red)
-        )
-    }) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            Column {
-                TitleSection("Lanches")
-                ItemCardapio("Gremista assado", "cu arregaçado", "R$ 0,10")
-            }
-
-
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "",
+                        )
+                    }
+                },
+                title = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Text(
+                            text = "Meu cardápio",
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }, colors = TopAppBarDefaults.topAppBarColors(
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+            )
+        }) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
+            TitleSection("Lanches")
+            MenuItem("X-Bacon", "Pão grelhado, carne, bacon, alface e tomate", "26,00")
+            MenuItem("X-Tradicional", "Pão grelhado, carne, alface e tomate", "26,00")
+            TitleSection("Bebidas")
+            MenuItem("Coca-Cola", "250ml", "4,00")
+            MenuItem("Água com gás", "250ml", "4,00")
         }
-    }   
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun CardapioScreenComponentPreview() {
-
+    }
 }
 
 @Composable
@@ -93,23 +77,4 @@ fun TitleSection(titulo: String) {
         color = MaterialTheme.colorScheme.primary,
         fontWeight = FontWeight.Bold
     )
-}
-
-@Composable
-fun ItemCardapio(lanche: String, ingrediente: String, valor: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column {
-            Text(lanche, fontWeight = FontWeight.Bold)
-            Text(ingrediente, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
-        }
-
-        Text(valor, fontWeight = FontWeight.Bold)
-    }
-
-    HorizontalDivider()
 }
