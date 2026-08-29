@@ -1,0 +1,23 @@
+# --- Kotlin ---
+.kotlin/
+*.kotlin_module
+
+# --- Gradle ---
+.gradle/
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# --- IntelliJ IDEA / Android Studio ---
+.idea/
+*.iml
+*.iws
+out/
+
+# --- Configurações Locais e Chaves ---
+local.properties
+*.keystore
+*.jks
+
+# --- Sistemas Operacionais ---
+.DS_Store
+Thumbs.db
