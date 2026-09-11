@@ -21,7 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.learningkotlin.ui.theme.components.MenuItem
+import com.example.learningkotlin.model.Prato
+import com.example.learningkotlin.ui.theme.components.PratoCard
 
 class CardapioScreen
 
@@ -57,13 +58,40 @@ fun CardapioScreenComponent() {
                 )
             )
         }) { innerPadding ->
+        val lanches = listOf(
+            Prato(
+                nome = "X-Bacon",
+                descricao = "Pão grelhado, carne, bacon, alface e tomate",
+                preco = "26,00",
+                imagemUrl = "https://picsum.photos/seed/x-bacon/200"
+            ),
+            Prato(
+                nome = "X-Tradicional",
+                descricao = "Pão grelhado, carne, alface e tomate",
+                preco = "26,00",
+                imagemUrl = "https://picsum.photos/seed/x-tradicional/200"
+            )
+        )
+        val bebidas = listOf(
+            Prato(
+                nome = "Coca-Cola",
+                descricao = "250ml",
+                preco = "4,00",
+                imagemUrl = "https://picsum.photos/seed/coca-cola/200"
+            ),
+            Prato(
+                nome = "Água com gás",
+                descricao = "250ml",
+                preco = "4,00",
+                imagemUrl = "https://picsum.photos/seed/agua-com-gas/200"
+            )
+        )
+
         Column(modifier = Modifier.padding(innerPadding)) {
             TitleSection("Lanches")
-            MenuItem("X-Bacon", "Pão grelhado, carne, bacon, alface e tomate", "26,00")
-            MenuItem("X-Tradicional", "Pão grelhado, carne, alface e tomate", "26,00")
+            lanches.forEach { prato -> PratoCard(prato) }
             TitleSection("Bebidas")
-            MenuItem("Coca-Cola", "250ml", "4,00")
-            MenuItem("Água com gás", "250ml", "4,00")
+            bebidas.forEach { prato -> PratoCard(prato) }
         }
     }
 }
